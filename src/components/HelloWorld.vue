@@ -13,6 +13,11 @@
     <button @click="fetchFood">Search Food!</button>
   </div>
 
+  <div id="results">
+    <h2>{{mealTitle}}</h2>
+    <img v-bind:src="mealImg">
+  </div>
+
 <!--  www.themealdb.com/api/json/v1/1/filter.php?i={{foodQuery}}-->
 
 
@@ -27,16 +32,21 @@ export default {
         foodQuery: "",
         msg: "Search for a recipe",
         url: "www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast",
-        data: ""
+        data: "",
+        mealTitle: "",
+        mealImg: ""
       }
     },
     methods: {
 
       async fetchFood(){
         const response = await fetch( `https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.foodQuery}`)
-        console.log(await response.json())
+        const results = await response.json();
+        console.log(results)
+        this.mealTitle = results.meals[2].strMeal;
+        console.log(this.mealImg = results.meals[2].strMealThumb)
       }
-    }
+   }
 }
 
 
