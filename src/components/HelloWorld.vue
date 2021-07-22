@@ -12,15 +12,12 @@
 
   <div class="results">
 <!--    <h2>{{ mealResults }}</h2>-->
-    <ul>
-      <li v-for="meal in mealResults.meals" :key="meal.idMeal">
+    <ul class="list">
+      <li class="card" v-for="meal in mealResults.meals" :key="meal.idMeal">
         <h4>{{meal.strMeal}}</h4>
         <img class="foodthumb" :src="meal.strMealThumb">
       </li>
     </ul>
-    <img class="foodthumb" v-bind:src="mealImg">
-
-
   </div>
 
 </template>
@@ -74,13 +71,28 @@ img {
   width: 100px;
 }
 
-.foodthumb {
-  width: 200px;
+.results {
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
-.results{
+.foodthumb {
+  width: 100%;
+  border-radius: 0px 0px 50px 50px;
+}
+
+.list {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  flex: 24%;
+  flex-shrink: 0;
+  box-shadow: 0 4px 21px -15px rgba(0,0,0,0.50);
+  border-radius: 50px;
+  width: 100%;
 }
 
 </style>
