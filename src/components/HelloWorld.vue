@@ -5,16 +5,23 @@
   </div>
 
   <div class="search">
-    <h2>{{ foodQuery }}</h2>
-    <input v-model="foodQuery" placeholder="search by ingredient">
+    <h2>{{ mealQuery }}</h2>
+    <input v-model="mealQuery" placeholder="search by ingredient">
     <button @click="fetchFood">Search Food!</button>
   </div>
 
+  <div v-if="errorMsg">
+    {{ errorMsg }}
+  </div>
+
   <div class="results">
-<!--    <h2>{{ mealResults }}</h2>-->
+    <div v-for="recipe in recipeResults" :key="recipe">
+      <p> {{ recipe[0].strInstructions }}</p>
+    </div>
+
     <ul class="list">
-      <li class="card" v-for="meal in mealResults.meals" :key="meal.idMeal">
-        <h4>{{meal.strMeal}}</h4>
+      <li class="card" @click="getRecipe(meal)" v-for="meal in mealResults.meals" :key="meal.idMeal">
+        <h4>{{ meal.strMeal }}</h4>
         <img class="foodthumb" :src="meal.strMealThumb">
       </li>
     </ul>
@@ -28,18 +35,41 @@ export default {
 
   data() {
     return {
-      foodQuery: "",
+      mealQuery: "",
       msg: "Search for a recipe",
-      mealResults: "",
+      mealResults: [],
+      errorMsg: "",
+      recipeResults: ""
     }
   },
   methods: {
 
     async fetchFood() {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.foodQuery}`)
+
+      try {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`)
+
+        const results = await response.json();
+        this.mealResults = results
+
+        // console.log(results)
+
+      } catch (e) {
+        this.errorMsg = `no food with ${this.mealQuery}`
+        console.log('error')
+      }
+    },
+
+    async getRecipe(meal) {
+      console.log("it works")
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`)
+
       const results = await response.json();
-      this.mealResults = results
+      this.recipeResults = results
+
       console.log(results)
+      console.log(meal.idMeal)
+
     }
   }
 }
@@ -78,7 +108,7 @@ img {
 
 .foodthumb {
   width: 100%;
-  border-radius: 0px 0px 50px 50px;
+  border-radius: 0px 0px 10px 10px;
 }
 
 .list {
@@ -88,10 +118,11 @@ img {
 }
 
 .card {
-  flex: 24%;
-  flex-shrink: 0;
-  box-shadow: 0 4px 21px -15px rgba(0,0,0,0.50);
-  border-radius: 50px;
+  flex: 1 0 20%;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 21px -15px rgba(0, 0, 0, 0.50);
+  border-radius: 10px;
   width: 100%;
 }
 
