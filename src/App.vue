@@ -1,7 +1,6 @@
 <template>
   <Header header-title="recipes"></Header>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HelloWorld/>
 </template>
 
 <script>
@@ -30,4 +29,5 @@ body {
   color: #2c3e50;
   margin-top: 0px;
 }
+
 </style>

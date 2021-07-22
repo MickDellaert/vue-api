@@ -1,19 +1,19 @@
 <template>
   <div class="hello">
+    <img alt="food logo" src="@/assets/food-serving.png">
+
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
+
 
   </div>
 
   <div id="vue-app">
-    <h2>Hello {{ message }}!</h2>
-    <input v-model="message" placeholder="search by ingredient">
-    <button @click="reverseText">Reverse it!</button>
+    <h2>{{foodQuery}}</h2>
+    <input v-model="foodQuery" placeholder="search by ingredient">
+    <button @click="fetchFood">Search Food!</button>
   </div>
+
+<!--  www.themealdb.com/api/json/v1/1/filter.php?i={{foodQuery}}-->
 
 
 </template>
@@ -24,16 +24,19 @@ export default {
 
   data(){
       return{
-        message: "BeCode",
-        msg: "hellow"
+        foodQuery: "",
+        msg: "Search for a recipe",
+        url: "www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast",
+        data: ""
       }
     },
     methods: {
-      reverseText(){
-        this.message = this.message.split('').reverse().join('')
+
+      async fetchFood(){
+        const response = await fetch( `https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.foodQuery}`)
+        console.log(await response.json())
       }
     }
-
 }
 
 
@@ -55,4 +58,10 @@ li {
 a {
   color: #42b983;
 }
+
+img{
+  width: 100px;
+  fill: #ff4c00;
+}
+
 </style>
