@@ -1,4 +1,5 @@
 <template>
+  <RecipeModal recipe="test"/>
   <div class="hello">
     <img alt="food logo" src="@/assets/food-serving.png">
     <h1>{{ msg }}</h1>
@@ -19,7 +20,7 @@
       <p> {{ recipe[0].strInstructions }}</p>
     </div>
 
-    <ul class="list">
+    <ul class="list-container">
       <li class="card" @click="getRecipe(meal)" v-for="meal in mealResults.meals" :key="meal.idMeal">
         <h4>{{ meal.strMeal }}</h4>
         <img class="foodthumb" :src="meal.strMealThumb">
@@ -30,8 +31,11 @@
 </template>
 
 <script>
+import RecipeModal from "./RecipeModal";
+
 export default {
   name: 'HelloWorld',
+  components: { RecipeModal },
 
   data() {
     return {
@@ -89,7 +93,6 @@ ul {
 }
 
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 
@@ -102,28 +105,42 @@ img {
 }
 
 .results {
-  margin-left: 200px;
-  margin-right: 200px;
+  margin: auto;
+  max-width: 1335px;
 }
 
 .foodthumb {
   width: 100%;
   border-radius: 0px 0px 10px 10px;
+  display: block;
 }
 
-.list {
+.list-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 
 .card {
-  flex: 1 0 20%;
-  flex-direction: column;
+  flex-basis: 23%;
   overflow: hidden;
-  box-shadow: 0 4px 21px -15px rgba(0, 0, 0, 0.50);
+  box-shadow: 0 4px 21px -15px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
-  width: 100%;
+  margin-top: 40px;
+}
+
+@media(max-width: 1073px) {
+  .card {
+    flex-basis: 30%;
+  }
+}@media(max-width: 815px) {
+  .card {
+    flex-basis: 45%;
+  }
+}@media(max-width: 555px) {
+  .card {
+    flex-basis: 100%;
+  }
 }
 
 </style>
