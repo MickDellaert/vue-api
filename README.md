@@ -22,7 +22,7 @@ Trying to make a food app using the Free Meal API using Vue
 
 - [x] Recycle files used in previous presentation -> _I took the small example from my presentation and made them into separate components and made the function work inside a component setup._
 
-### 22/07/2021
+### 23/07/2021
 - [x] Make the results from the users search display in a card style grid -> _Not using Bootstrap this time, trying to make the website responsive using flexbox and media queries._ 
   
 - [ ] Try to get a modal pop up when a meal is selected to show more details -> _Look into making a modal work in Vue, passing methods and variables between components._
