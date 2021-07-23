@@ -19,11 +19,16 @@ export default {
 </script>
 
 <style scoped>
+
+h1 {
+  font-style: normal;
+}
+
 .nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #eeeeee;
+  background-color: #f3f3f3;
   border-bottom: solid 5px #ff4c00;
   padding: 10px 40px;
   margin-bottom: 40px;

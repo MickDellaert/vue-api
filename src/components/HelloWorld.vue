@@ -4,7 +4,7 @@
   </div>
 
   <div class="hello">
-    <img alt="food logo" src="@/assets/food-serving.png">
+    <!--    <img alt="food logo" src="@/assets/food-serving.png">-->
     <h1>{{ msg }}</h1>
   </div>
 
@@ -14,7 +14,7 @@
     <button @click="fetchFood">Search Food!</button>
   </div>
 
-  <div v-if="errorMsg">
+  <div class="error" v-if="errorMsg">
     {{ errorMsg }}
   </div>
 
@@ -46,21 +46,30 @@ export default {
       showModal: false
     }
   },
+
+  // Load API response on page load
+  // mounted() {
+  //   this.fetchFood()
+  // },
+
   methods: {
 
     async fetchFood() {
 
-      try {
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`)
 
-        const results = await response.json();
-        this.mealResults = results
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`)
+      const results = await response.json();
 
-        // console.log(results)
+      if (results.meals == null) {
 
-      } catch (e) {
-        this.errorMsg = `no food with ${this.mealQuery}`
+        this.errorMsg = `Unfortunately, couldn't find any recipe with ${this.mealQuery}, something else
+                        you fancy?`
         console.log('error')
+        console.log(results)
+
+      } else {
+        this.mealResults = results
+        this.errorMsg = ""
       }
     },
 
@@ -75,7 +84,7 @@ export default {
       console.log(meal.idMeal)
     },
 
-    toggleModal(){
+    toggleModal() {
       this.showModal = !this.showModal
     }
   }
@@ -86,6 +95,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
+h1 {
+  font-family: 'Sacramento', cursive;
+  font-size: 75px;
+  color: #ff4c00;
+}
+
 h3 {
   margin: 40px 0 0;
 }
@@ -112,6 +131,12 @@ img {
   max-width: 1335px;
 }
 
+.error {
+  font-size: 20px;
+  color: dimgray;
+  margin-top: 30px
+}
+
 .foodthumb {
   width: 100%;
   border-radius: 0px 0px 10px 10px;
@@ -127,8 +152,9 @@ img {
 .card {
   flex-basis: 23%;
   overflow: hidden;
-  box-shadow: 0 4px 21px -15px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.13), 0px 10px 15px 5px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  border: #e7e7e7 1px solid;
   margin-top: 40px;
 }
 
