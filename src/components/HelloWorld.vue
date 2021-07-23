@@ -1,5 +1,8 @@
 <template>
-  <RecipeModal recipe="test"/>
+  <div v-if="showModal">
+    <RecipeModal :recipe-results-prop="recipeResults" @close="toggleModal"/>
+  </div>
+
   <div class="hello">
     <img alt="food logo" src="@/assets/food-serving.png">
     <h1>{{ msg }}</h1>
@@ -16,12 +19,8 @@
   </div>
 
   <div class="results">
-    <div v-for="recipe in recipeResults" :key="recipe">
-      <p> {{ recipe[0].strInstructions }}</p>
-    </div>
-
     <ul class="list-container">
-      <li class="card" @click="getRecipe(meal)" v-for="meal in mealResults.meals" :key="meal.idMeal">
+      <li class="card" @click="getRecipe(meal); toggleModal()" v-for="meal in mealResults.meals" :key="meal.idMeal">
         <h4>{{ meal.strMeal }}</h4>
         <img class="foodthumb" :src="meal.strMealThumb">
       </li>
@@ -35,7 +34,7 @@ import RecipeModal from "./RecipeModal";
 
 export default {
   name: 'HelloWorld',
-  components: { RecipeModal },
+  components: {RecipeModal},
 
   data() {
     return {
@@ -43,7 +42,8 @@ export default {
       msg: "Search for a recipe",
       mealResults: [],
       errorMsg: "",
-      recipeResults: ""
+      recipeResults: "",
+      showModal: false
     }
   },
   methods: {
@@ -73,7 +73,10 @@ export default {
 
       console.log(results)
       console.log(meal.idMeal)
+    },
 
+    toggleModal(){
+      this.showModal = !this.showModal
     }
   }
 }
@@ -129,15 +132,19 @@ img {
   margin-top: 40px;
 }
 
-@media(max-width: 1073px) {
+@media (max-width: 1073px) {
   .card {
     flex-basis: 30%;
   }
-}@media(max-width: 815px) {
+}
+
+@media (max-width: 815px) {
   .card {
     flex-basis: 45%;
   }
-}@media(max-width: 555px) {
+}
+
+@media (max-width: 555px) {
   .card {
     flex-basis: 100%;
   }

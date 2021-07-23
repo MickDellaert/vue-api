@@ -1,10 +1,10 @@
 <template>
-  <div class="backdrop">
+  <div class="backdrop" @click="closeModal">
     <div class="modal">
       <h1>Modal title</h1>
-      <div v-for="recipe in recipeResults" :key="recipe">
+      <div v-for="recipe in recipeResultsProp" :key="recipe">
+        <h4>{{ recipe[0].strMeal }}</h4>
         <p> {{ recipe[0].strInstructions }}</p>
-        <p>recipe</p>
       </div>
     </div>
   </div>
@@ -14,7 +14,13 @@
 <script>
 export default {
   name: "RecipeModal",
-  props: ["recipe"]
+  props: ["recipeResultsProp"],
+
+  methods: {
+    closeModal() {
+      this.$emit("close")
+    }
+  }
 }
 </script>
 
