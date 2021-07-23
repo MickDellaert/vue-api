@@ -25,11 +25,13 @@ Trying to make a food app using the Free Meal API using Vue
 ###l 23/07/2021
 - [x] Make the results from the users search display in a card style grid -> _Not using Bootstrap this time, trying to make the website responsive using flexbox and media queries._ 
   
-- [ ] Try to get a modal pop up when a meal is selected to show more details -> _Look into making a modal work in Vue, passing methods and variables between components._
+- [x] Try to get a modal pop up when a meal is selected to show more details -> _Look into making a modal work in Vue, passing methods and variables between components._
 
-- [ ] Implement a message popping up when no results are found -> _Add conditional statements to the fetch async function._
+- [x] Implement a message popping up when no results are found -> _Add conditional statements to the fetch async function._
 
-- [ ] Further styling
+- [x] Further styling
+
+- [ ] Find a way to display the ingredients with a loop
 
 
 

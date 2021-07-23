@@ -42,12 +42,12 @@ export default {
       msg: "Search for a recipe",
       mealResults: [],
       errorMsg: "",
-      recipeResults: "",
+      recipeResults: [],
       showModal: false
     }
   },
 
-  // Load API response on page load
+  // Load API response on page load (disabled for now)
   // mounted() {
   //   this.fetchFood()
   // },
@@ -62,26 +62,25 @@ export default {
 
       if (results.meals == null) {
 
-        this.errorMsg = `Unfortunately, couldn't find any recipe with ${this.mealQuery}, something else
-                        you fancy?`
-        console.log('error')
-        console.log(results)
+        this.errorMsg = `Unfortunately, we couldn't find any recipe with ${this.mealQuery}, something else you fancy?`
+        // console.log('error')
+        // console.log(results)
 
       } else {
         this.mealResults = results
+        console.log(results)
         this.errorMsg = ""
       }
     },
 
     async getRecipe(meal) {
-      console.log("it works")
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`)
 
       const results = await response.json();
       this.recipeResults = results
 
-      console.log(results)
-      console.log(meal.idMeal)
+      // console.log(results.meals[0].strIngredient1)
+      // console.log(meal.idMeal)
     },
 
     toggleModal() {
@@ -101,8 +100,9 @@ export default {
 
 h1 {
   font-family: 'Sacramento', cursive;
-  font-size: 75px;
+  font-size: 70px;
   color: #ff4c00;
+  margin-top: 20px;
 }
 
 h3 {
@@ -156,6 +156,26 @@ img {
   border-radius: 10px;
   border: #e7e7e7 1px solid;
   margin-top: 40px;
+}
+
+input {
+  width: 250px;
+  height: 40px;
+  border-radius: 50px 0px 0px 50px;
+  text-align: center;
+  border: #ff4c00 1px solid;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+button {
+  width: 150px;
+  height: 40px;
+  border-radius: 0px 50px 50px 0px;
+  background-color: #ff4c00;
+  color: white;
+  border: #ff4c00 1px solid;
+  box-sizing: border-box;
 }
 
 @media (max-width: 1073px) {

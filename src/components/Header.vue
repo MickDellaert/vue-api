@@ -15,13 +15,13 @@ export default {
   }
 }
 
-
 </script>
 
 <style scoped>
 
 h1 {
   font-style: normal;
+  font-size: 25px;
 }
 
 .nav-bar {

@@ -1,5 +1,5 @@
 <template>
-  <Header header-title="recipes"></Header>
+  <Header header-title="Delish Delights"></Header>
   <HelloWorld/>
 </template>
 
