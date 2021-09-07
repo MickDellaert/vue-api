@@ -19,7 +19,7 @@ export default {
 <style>
 body {
   margin: 0px;
-  background-image: url("./assets/1537710913.jpg");
+  background-image: url("./assets/1537710913_brushed.jpg");
   background-position: center top;
   background-repeat: no-repeat;
   background-attachment: fixed;

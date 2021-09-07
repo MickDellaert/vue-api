@@ -141,7 +141,7 @@ img {
 
 .foodthumb {
   width: 100%;
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 4px 4px;
   display: block;
 }
 
@@ -152,11 +152,12 @@ img {
 }
 
 .card {
-  flex-basis: 23%;
+  background-color: white;
+  flex-basis: 21%;
   overflow: hidden;
   box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.13), 0px 10px 15px 5px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  border: #e7e7e7 1px solid;
+  border-radius: 4px;
+  border: white 2px solid;
   margin-top: 40px;
 }
 
@@ -182,7 +183,7 @@ button {
 
 @media (max-width: 1073px) {
   .card {
-    flex-basis: 30%;
+    flex-basis: 22%;
   }
 }
 
