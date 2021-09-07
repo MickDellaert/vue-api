@@ -11,7 +11,6 @@ export default {
   name: "Header",
   props: {
     headerTitle: String,
-
   }
 }
 

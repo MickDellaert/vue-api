@@ -1,6 +1,5 @@
 <template>
   <div class="backdrop" @click="closeModal">
-    <button @click="increment">test</button>
 
     <div class="modal">
       <div v-for="recipe in recipeResultsProp" :key="recipe">

@@ -43,7 +43,8 @@ export default {
       mealResults: [],
       errorMsg: "",
       recipeResults: [],
-      showModal: false
+      showModal: false,
+      ingredients: []
     }
   },
 
@@ -55,7 +56,6 @@ export default {
   methods: {
 
     async fetchFood() {
-
 
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`)
       const results = await response.json();
@@ -78,6 +78,8 @@ export default {
 
       const results = await response.json();
       this.recipeResults = results
+      console.log(this.recipeResults.meals[0].strMeasure1)
+
 
       // console.log(results.meals[0].strIngredient1)
       // console.log(meal.idMeal)
@@ -186,13 +188,13 @@ button {
 
 @media (max-width: 815px) {
   .card {
-    flex-basis: 45%;
+    flex-basis: 30%;
   }
 }
 
 @media (max-width: 555px) {
   .card {
-    flex-basis: 100%;
+    flex-basis: 40%;
   }
 }
 
