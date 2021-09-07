@@ -19,6 +19,11 @@ export default {
 <style>
 body {
   margin: 0px;
+  background-image: url("./assets/1537710913.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 #app {
