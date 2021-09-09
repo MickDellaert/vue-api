@@ -17,13 +17,36 @@ export default {
 </script>
 
 <style>
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0px;
-  background-image: url("./assets/1537710913_brushed.jpg");
-  background-position: center top;
+  background-image: url("./assets/1537710913.jpg");
+  background-position:  center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+@media (max-width: 1073px) {
+  body {
+    background-position:  center top;
+  }
+}
+
+@media (max-width: 815px) {
+  body {
+    background-position:  center top;
+  }
+}
+
+@media (max-width: 555px) {
+  body {
+    background-position:  center top;
+  }
 }
 
 #app {

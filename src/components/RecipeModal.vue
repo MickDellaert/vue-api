@@ -7,22 +7,19 @@
         <hr>
         <h4>Preparation</h4>
         <p> {{ recipe[0].strInstructions }}</p>
-        <h4>Ingredients</h4>
-        <table style="width:100%">
-          <tr>
-            <th>Ingredient</th>
-            <th>Measure</th>
-          </tr>
-          <tr>
-            <td>{{ recipe[0].strIngredient1 }}</td>
-            <td>{{ recipe[0].strMeasure1 }}</td>
-          </tr>
-          <tr>
-            <td>{{ recipe[0].strIngredient2 }}</td>
-            <td>{{ recipe[0].strMeasure2 }}</td>
-          </tr>
-        </table>
       </div>
+
+      <h4>Ingredients</h4>
+      <table style="width:100%">
+        <tr>
+          <th>Ingredient</th>
+          <th>Measure</th>
+        </tr>
+        <tr v-for="it in ingredientsProp" :key="it.id">
+          <td>{{ it.name }}</td>
+          <td>{{ it.measure }}</td>
+        </tr>
+      </table>
     </div>
   </div>
 
@@ -31,12 +28,12 @@
 <script>
 export default {
   name: "RecipeModal",
-  props: ["recipeResultsProp"],
+  props: ["recipeResultsProp", "ingredientsProp", "ingredientProp"],
 
   methods: {
     closeModal() {
       this.$emit("close")
-    }
+   }
   }
 }
 </script>
@@ -55,12 +52,13 @@ h4 {
 }
 
 .modal {
-  width: 800px;
   padding: 20px;
-  margin: 100px auto;
+  margin: 100px 40px;
   background: white;
   border-radius: 10px;
   white-space: break-spaces;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .backdrop {

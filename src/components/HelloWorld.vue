@@ -1,30 +1,34 @@
 <template>
-  <div v-if="showModal">
-    <RecipeModal :recipe-results-prop="recipeResults" @close="toggleModal"/>
-  </div>
+  <div class="container">
+    <div v-if="showModal">
+      <RecipeModal :recipe-results-prop="recipeResults" :ingredients-prop="ingredients" @close="toggleModal"/>
+    </div>
+    <div class="messagecontainer">
+      <div v-if="!show" class="hello">
+        <!--    <img alt="food logo" src="@/assets/food-serving.png">-->
+        <h1>{{ msg }}</h1>
+      </div>
 
-  <div class="hello">
-    <!--    <img alt="food logo" src="@/assets/food-serving.png">-->
-    <h1 v-if="!show">{{ msg }}</h1>
-  </div>
+      <div class="search">
+        <input v-model="mealQuery" placeholder="search by ingredient">
+        <button @click="fetchFood">Search Food!</button>
+        <h2 v-if="mealQuery !== ''">You searched for: {{ mealQuery }}</h2>
+      </div>
+    </div>
 
-  <div class="search">
-    <input v-model="mealQuery" placeholder="search by ingredient">
-    <button @click="fetchFood">Search Food!</button>
-    <h2 v-if="mealQuery !== ''"> you searched for: {{ mealQuery }}</h2>
-  </div>
+    <div class="error" v-if="errorMsg">
+      {{ errorMsg }}
+    </div>
 
-  <div class="error" v-if="errorMsg">
-    {{ errorMsg }}
-  </div>
 
-  <div v-if="show" class="results">
-    <ul class="list-container">
-      <li class="card" @click="getRecipe(meal); toggleModal()" v-for="meal in mealResults.meals" :key="meal.idMeal">
-        <h4>{{ meal.strMeal }}</h4>
-        <img class="foodthumb" :src="meal.strMealThumb">
-      </li>
-    </ul>
+    <div v-if="show" class="results">
+      <ul class="list-container">
+        <li class="card" @click="getRecipe(meal); toggleModal()" v-for="meal in mealResults.meals" :key="meal.idMeal">
+          <h4>{{ meal.strMeal }}</h4>
+          <img class="foodthumb" :src="meal.strMealThumb">
+        </li>
+      </ul>
+    </div>
   </div>
 
 </template>
@@ -57,23 +61,25 @@ export default {
   methods: {
 
     async fetchFood() {
+      if (this.mealQuery !== "") {
 
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`);
-      const results = await response.json();
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`);
+        const results = await response.json();
 
-      if (results.meals == null) {
+        if (results.meals == null) {
 
-        this.errorMsg = `Unfortunately, we couldn't find any recipe with ${this.mealQuery}, something else you fancy?`;
-        this.show = false;
+          this.errorMsg = `Unfortunately, we couldn't find any recipe with ${this.mealQuery}, something else you fancy?`;
+          this.show = false;
 
-        // console.log('error')
-        console.log(results.meals)
+          // console.log('error')
+          // console.log(results.meals)
 
-      } else {
-        this.mealResults = results;
-        console.log(results);
-        this.errorMsg = "";
-        this.show = true;
+        } else {
+          this.mealResults = results;
+          // console.log(results);
+          this.errorMsg = "";
+          this.show = true;
+        }
       }
     },
 
@@ -84,6 +90,22 @@ export default {
       this.recipeResults = results;
       console.log(this.recipeResults.meals[0].strMeasure1);
 
+      this.meal = results.meals[0]
+      this.ingredients.splice(0);
+
+      for (let index = 0; index < 20; index++) {
+        let num = index + 1
+        let ingredientName = this.meal[`strIngredient${num}`]
+        let amount = this.meal[`strMeasure${num}`]
+
+        const item = {
+          id: num,
+          name: ingredientName,
+          measure: amount,
+        }
+        this.ingredients.push(item)
+        console.log(this.ingredients)
+      }
 
       // console.log(results.meals[0].strIngredient1)
       // console.log(meal.idMeal)
@@ -108,14 +130,27 @@ h1 {
   font-family: 'Sacramento', cursive;
   font-size: 70px;
   color: #ff4c00;
-  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 h3 {
   margin: 40px 0 0;
 }
 
+.container {
+
+}
+
+.messagecontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 ul {
+  margin-top: 50px;
   list-style-type: none;
   padding: 0;
 }
@@ -135,6 +170,10 @@ img {
 .results {
   margin: auto;
   max-width: 1335px;
+}
+
+.search {
+  margin-top: 20px;
 }
 
 .error {

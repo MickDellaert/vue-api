@@ -29,14 +29,12 @@ h1 {
   align-items: center;
   background-color: #f3f3f3;
   border-top: solid 5px #ff4c00;
-  padding: 10px 40px;
-  margin-bottom: 40px;
+  padding: 0 30px;
   box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.13), 0px 10px 15px 5px rgba(0, 0, 0, 0.05);
-
 }
 
 img {
-  width: 60px;
+  width: 40px;
 }
 
 </style>
