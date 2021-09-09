@@ -5,20 +5,20 @@
 
   <div class="hello">
     <!--    <img alt="food logo" src="@/assets/food-serving.png">-->
-    <h1>{{ msg }}</h1>
+    <h1 v-if="!show">{{ msg }}</h1>
   </div>
 
   <div class="search">
-    <h2>{{ mealQuery }}</h2>
     <input v-model="mealQuery" placeholder="search by ingredient">
     <button @click="fetchFood">Search Food!</button>
+    <h2 v-if="mealQuery !== ''"> you searched for: {{ mealQuery }}</h2>
   </div>
 
   <div class="error" v-if="errorMsg">
     {{ errorMsg }}
   </div>
 
-  <div class="results">
+  <div v-if="show" class="results">
     <ul class="list-container">
       <li class="card" @click="getRecipe(meal); toggleModal()" v-for="meal in mealResults.meals" :key="meal.idMeal">
         <h4>{{ meal.strMeal }}</h4>
@@ -44,7 +44,8 @@ export default {
       errorMsg: "",
       recipeResults: [],
       showModal: false,
-      ingredients: []
+      ingredients: [],
+      show: false,
     }
   },
 
@@ -57,19 +58,22 @@ export default {
 
     async fetchFood() {
 
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`)
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${this.mealQuery}`);
       const results = await response.json();
 
       if (results.meals == null) {
 
-        this.errorMsg = `Unfortunately, we couldn't find any recipe with ${this.mealQuery}, something else you fancy?`
+        this.errorMsg = `Unfortunately, we couldn't find any recipe with ${this.mealQuery}, something else you fancy?`;
+        this.show = false;
+
         // console.log('error')
-        // console.log(results)
+        console.log(results.meals)
 
       } else {
-        this.mealResults = results
-        console.log(results)
-        this.errorMsg = ""
+        this.mealResults = results;
+        console.log(results);
+        this.errorMsg = "";
+        this.show = true;
       }
     },
 
@@ -77,8 +81,8 @@ export default {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`)
 
       const results = await response.json();
-      this.recipeResults = results
-      console.log(this.recipeResults.meals[0].strMeasure1)
+      this.recipeResults = results;
+      console.log(this.recipeResults.meals[0].strMeasure1);
 
 
       // console.log(results.meals[0].strIngredient1)
