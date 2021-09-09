@@ -2,25 +2,28 @@
   <div class="backdrop" @click="closeModal">
 
     <div class="modal">
-      <div v-for="recipe in recipeResultsProp" :key="recipe">
+      <div class="preparation" v-for="recipe in recipeResultsProp" :key="recipe">
         <h1>{{ recipe[0].strMeal }}</h1>
         <hr>
         <h4>Preparation</h4>
         <p> {{ recipe[0].strInstructions }}</p>
       </div>
 
-      <h4>Ingredients</h4>
-      <table style="width:100%">
-        <tr>
-          <th>Ingredient</th>
-          <th>Measure</th>
-        </tr>
-        <tr v-for="it in ingredientsProp" :key="it.id">
-          <td>{{ it.name }}</td>
-          <td>{{ it.measure }}</td>
-        </tr>
-      </table>
+      <div>
+        <table style="width:100%">
+          <h4>Ingredients</h4>
+          <tr>
+            <th>Ingredient</th>
+            <th>Measure</th>
+          </tr>
+          <tr v-for="it in ingredientsProp" :key="it.id">
+            <td>{{ it.name }}</td>
+            <td>{{ it.measure }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
+
   </div>
 
 </template>
@@ -33,7 +36,7 @@ export default {
   methods: {
     closeModal() {
       this.$emit("close")
-   }
+    }
   }
 }
 </script>
@@ -41,6 +44,7 @@ export default {
 <style scoped>
 
 h1 {
+  margin-top: 0;
 }
 
 hr {
@@ -51,7 +55,17 @@ h4 {
   color: #ff4c00;
 }
 
+p {
+  font-size: 16px;
+}
+
+.preparation{
+  width: 40%;
+}
 .modal {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
   padding: 20px;
   margin: 100px 40px;
   background: white;

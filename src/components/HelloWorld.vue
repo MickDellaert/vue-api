@@ -13,6 +13,7 @@
         <input v-model="mealQuery" placeholder="search by ingredient">
         <button @click="fetchFood">Search Food!</button>
         <h2 v-if="mealQuery !== ''">You searched for: {{ mealQuery }}</h2>
+        <h3 v-if="show">Click on the thumbnail for more information</h3>
       </div>
     </div>
 
@@ -131,6 +132,7 @@ h1 {
   font-size: 70px;
   color: #ff4c00;
   margin-bottom: 0;
+  margin-top: 250px;
 }
 
 h3 {

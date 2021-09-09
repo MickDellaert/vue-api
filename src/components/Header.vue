@@ -1,6 +1,6 @@
 <template>
   <div class="nav-bar">
-    <img src="@/assets/food-serving.png" alt="Vue logo">
+    <img @click="reloadPage" src="@/assets/food-serving.png" alt="Vue logo">
     <h1>{{ headerTitle }}</h1>
   </div>
 
@@ -11,6 +11,11 @@ export default {
   name: "Header",
   props: {
     headerTitle: String,
+  },
+  methods: {
+    reloadPage(){
+      window.location.reload()
+    }
   }
 }
 
