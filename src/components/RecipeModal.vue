@@ -2,25 +2,31 @@
   <div class="backdrop" @click="closeModal">
 
     <div class="modal">
-      <div class="preparation" v-for="recipe in recipeResultsProp" :key="recipe">
-        <h1>{{ recipe[0].strMeal }}</h1>
+      <div class="meal-title">
+        <h1>{{ mealTitle }}</h1>
         <hr>
-        <h4>Preparation</h4>
-        <p> {{ recipe[0].strInstructions }}</p>
       </div>
 
       <div>
-        <table style="width:100%">
+        <!--        <img class="foodthumb" :src="meal.strMealThumb">-->
+      </div>
+
+      <div class="modal-contents">
+        <div class="ingredients">
           <h4>Ingredients</h4>
-          <tr>
-            <th>Ingredient</th>
-            <th>Measure</th>
-          </tr>
-          <tr v-for="it in ingredientsProp" :key="it.id">
-            <td>{{ it.name }}</td>
-            <td>{{ it.measure }}</td>
-          </tr>
-        </table>
+          <table>
+            <tr v-for="it in ingredientsProp" :key="it.id">
+              <td class="ingredient-name">{{ it.name }}</td>
+              <td class="ingredient-measure">{{ it.measure }}</td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <div class="preparation">
+            <h4>Preparation</h4>
+            <p>{{ preparation }}</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -31,7 +37,7 @@
 <script>
 export default {
   name: "RecipeModal",
-  props: ["recipeResultsProp", "ingredientsProp", "ingredientProp"],
+  props: ["ingredientsProp", "mealTitle", "preparation", "meal"],
 
   methods: {
     closeModal() {
@@ -45,6 +51,7 @@ export default {
 
 h1 {
   margin-top: 0;
+  text-align: left;
 }
 
 hr {
@@ -53,23 +60,39 @@ hr {
 
 h4 {
   color: #ff4c00;
+  text-align: left;
 }
 
 p {
-  font-size: 16px;
+  text-align: left;
 }
 
-.preparation{
-  width: 40%;
+.meal-title {
+  width: 100%
 }
-.modal {
+
+.modal-contents{
   display: flex;
-  justify-content: space-evenly;
-  position: relative;
+}
+
+.ingredients{
+  margin-right: 50px;
+}
+
+.preparation {
+
+}
+
+.modal {
+  font-family: Raleway;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.5;
+  line-height: 1.5;
   padding: 20px;
-  margin: 100px 40px;
+  margin: 50px 50px;
   background: white;
-  border-radius: 10px;
+  border-radius: 5px;
   white-space: break-spaces;
   max-height: 100%;
   overflow-y: auto;
@@ -81,6 +104,28 @@ p {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  line-height: 1.5;
+  width: 300px;
+}
+
+td {
+  font-size: 14px;
+}
+
+tr {
+  border-bottom: dimgray 1px solid;
+}
+
+.ingredient-name {
+  text-align: left;
+}
+
+.ingredient-measure {
+  text-align: right;
 }
 
 @media (max-width: 1073px) {

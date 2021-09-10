@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div v-if="showModal">
-      <RecipeModal :recipe-results-prop="recipeResults" :ingredients-prop="ingredients" @close="toggleModal"/>
+      <RecipeModal :recipe-results-prop="recipeResults" :ingredients-prop="ingredients" :mealTitle="mealTitle"
+                   :preparation="preparation" :meal="meal" @close="toggleModal"/>
     </div>
     <div class="messagecontainer">
       <div v-if="!show" class="hello">
@@ -25,8 +26,8 @@
     <div v-if="show" class="results">
       <ul class="list-container">
         <li class="card" @click="getRecipe(meal); toggleModal()" v-for="meal in mealResults.meals" :key="meal.idMeal">
-          <h4>{{ meal.strMeal }}</h4>
           <img class="foodthumb" :src="meal.strMealThumb">
+          <h4>{{ meal.strMeal }}</h4>
         </li>
       </ul>
     </div>
@@ -44,13 +45,17 @@ export default {
   data() {
     return {
       mealQuery: "",
-      msg: "Search for a recipe",
+      msg: "Search recipes",
       mealResults: [],
       errorMsg: "",
       recipeResults: [],
       showModal: false,
+      meal: {},
       ingredients: [],
       show: false,
+      mealTitle: "",
+      preparation: "",
+      mealThumb: ""
     }
   },
 
@@ -88,25 +93,34 @@ export default {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`)
 
       const results = await response.json();
-      this.recipeResults = results;
-      console.log(this.recipeResults.meals[0].strMeasure1);
+      // this.recipeResults = results;
+      // console.log(results);
 
       this.meal = results.meals[0]
-      this.ingredients.splice(0);
+      console.log(results.meals[0])
 
-      for (let index = 0; index < 20; index++) {
-        let num = index + 1
-        let ingredientName = this.meal[`strIngredient${num}`]
+      this.mealTitle = results.meals[0].strMeal
+      this.preparation = results.meals[0].strInstructions
+      // this.preparation = this.preparation.replace(/(\r\n|\n|\r)/gm,"");
+      this.mealThumb = results.meals[0].strMealThumb
+
+      this.ingredients.splice(0);
+      let ingredientName = undefined
+      let num = 1;
+
+      while (ingredientName !== "") {
+
+        ingredientName = this.meal[`strIngredient${num}`]
         let amount = this.meal[`strMeasure${num}`]
 
-        const item = {
-          id: num,
-          name: ingredientName,
-          measure: amount,
-        }
+        const item = {id: num, name: ingredientName, measure: amount}
         this.ingredients.push(item)
-        console.log(this.ingredients)
+        num++
+
       }
+      console.log(this.ingredients)
+      this.ingredients.pop()
+      return this.ingredients
 
       // console.log(results.meals[0].strIngredient1)
       // console.log(meal.idMeal)
@@ -126,10 +140,11 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 h1 {
   font-family: 'Sacramento', cursive;
-  font-size: 70px;
+  font-size: 80px;
   color: #ff4c00;
   margin-bottom: 0;
   margin-top: 250px;
@@ -140,7 +155,6 @@ h3 {
 }
 
 .container {
-
 }
 
 .messagecontainer {
@@ -186,7 +200,7 @@ img {
 
 .foodthumb {
   width: 100%;
-  border-radius: 0px 0px 4px 4px;
+  border-radius: 4px 4px 0px 0px;
   display: block;
 }
 
@@ -209,36 +223,43 @@ img {
 input {
   width: 250px;
   height: 40px;
-  border-radius: 50px 0px 0px 50px;
+  border-radius: 5px;
   text-align: center;
   border: #ff4c00 1px solid;
   box-sizing: border-box;
   font-size: 16px;
+  margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 button {
   width: 150px;
   height: 40px;
-  border-radius: 0px 50px 50px 0px;
+  border-radius: 5px;
   background-color: #ff4c00;
   color: white;
   border: #ff4c00 1px solid;
   box-sizing: border-box;
+  margin-left: 5px;
 }
 
-@media (max-width: 1073px) {
+@media (max-width: 992px) {
   .card {
     flex-basis: 22%;
   }
 }
 
-@media (max-width: 815px) {
+@media (max-width: 768px) {
   .card {
     flex-basis: 30%;
   }
 }
 
-@media (max-width: 555px) {
+@media (max-width: 576px) {
+  h1{
+    margin-top: 150px;
+    font-size: 60px;
+  }
   .card {
     flex-basis: 40%;
   }

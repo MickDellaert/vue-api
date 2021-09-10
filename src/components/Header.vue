@@ -1,7 +1,7 @@
 <template>
   <div class="nav-bar">
     <img @click="reloadPage" src="@/assets/food-serving.png" alt="Vue logo">
-    <h1>{{ headerTitle }}</h1>
+    <h1 class="delish-title">{{ headerTitle }}</h1>
   </div>
 
 </template>
@@ -24,7 +24,8 @@ export default {
 <style scoped>
 
 h1 {
-  font-style: normal;
+  font-weight: 300;
+  font-style: italic;
   font-size: 25px;
 }
 
