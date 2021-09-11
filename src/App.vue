@@ -24,7 +24,7 @@ html {
 body {
   height: 100%;
   margin: 0;
-  background-image: linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)), url("./assets/1537710913.jpg");
+  background-image: linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)), url("./assets/1537710913.jpg");
   background-position:  center center;
   background-repeat: no-repeat;
   background-attachment: fixed;

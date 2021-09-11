@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <div v-if="showModal">
       <RecipeModal :recipe-results-prop="recipeResults" :ingredients-prop="ingredients" :mealTitle="mealTitle"
@@ -147,7 +148,7 @@ h1 {
   font-size: 80px;
   color: #ff4c00;
   margin-bottom: 0;
-  margin-top: 250px;
+  margin-top: 150px;
 }
 
 h3 {
@@ -243,9 +244,23 @@ button {
   margin-left: 5px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1280px) {
   .card {
     flex-basis: 22%;
+  }
+
+  h1 {
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex-basis: 22%;
+  }
+
+  h1 {
+    margin-top: 120px;
   }
 }
 
@@ -253,16 +268,21 @@ button {
   .card {
     flex-basis: 30%;
   }
+  h1{
+    margin-top: 200px;
+  }
 }
 
 @media (max-width: 576px) {
-  h1{
-    margin-top: 150px;
-    font-size: 60px;
+  h1 {
+    margin-top: 120px;
+    font-size: 55px;
   }
+
   .card {
     flex-basis: 40%;
   }
 }
+
 
 </style>

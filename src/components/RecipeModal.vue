@@ -7,11 +7,11 @@
         <hr>
       </div>
 
-      <div>
-        <!--        <img class="foodthumb" :src="meal.strMealThumb">-->
-      </div>
 
       <div class="modal-contents">
+        <!--        <div class="foodthumb">-->
+        <!--          <img  :src="meal.strMealThumb">-->
+        <!--        </div>-->
         <div class="ingredients">
           <h4>Ingredients</h4>
           <table>
@@ -71,16 +71,27 @@ p {
   width: 100%
 }
 
-.modal-contents{
+.modal-contents {
   display: flex;
 }
 
-.ingredients{
+.ingredients {
   margin-right: 50px;
 }
 
 .preparation {
 
+}
+
+.backdrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
 }
 
 .modal {
@@ -89,22 +100,16 @@ p {
   font-size: 14px;
   line-height: 1.5;
   line-height: 1.5;
-  padding: 20px;
-  margin: 50px 50px;
+  padding: 40px;
   background: white;
   border-radius: 5px;
   white-space: break-spaces;
   max-height: 100%;
+  max-width: 60%;
   overflow-y: auto;
 }
 
-.backdrop {
-  top: 0;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-}
+
 
 table {
   border-collapse: collapse;
@@ -128,19 +133,34 @@ tr {
   text-align: right;
 }
 
-@media (max-width: 1073px) {
+@media (max-width: 1024px) {
+  .modal {
+    width: 80%;
+    max-height: 90vh;
+    max-width: 100vh;
+    padding: 20px;
+  }
+
+  .modal-contents {
+    display: block;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .ingredients {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
   .modal {
     width: 80%;
   }
 }
 
-@media (max-width: 815px) {
-  .modal {
-    width: 80%;
-  }
-}
-
-@media (max-width: 555px) {
+@media (max-width: 576px) {
   .modal {
     width: 80%;
   }
