@@ -17,11 +17,12 @@
         <h2 v-if="mealQuery !== ''">You searched for: {{ mealQuery }}</h2>
         <h3 v-if="show">Click on the thumbnail for more information</h3>
       </div>
+      <div class="error" v-if="errorMsg">
+        {{ errorMsg }}
+      </div>
     </div>
 
-    <div class="error" v-if="errorMsg">
-      {{ errorMsg }}
-    </div>
+
 
 
     <div v-if="show" class="results">
@@ -144,30 +145,46 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 h1 {
-  font-family: 'Sacramento', cursive;
+  font-family: 'Sacramento';
   font-size: 80px;
-  color: #ff4c00;
+  color: #06c167;
   margin-bottom: 0;
-  margin-top: 150px;
+  /*margin-top: 280px;*/
+}
+
+h2{
+  font-weight: 600;
 }
 
 h3 {
-  margin: 40px 0 0;
+  margin: 20px 0 0;
+  font-weight: 400;
+}
+
+h4{
+  font-weight: 600;
 }
 
 .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  /*margin-top: 70px;*/
 }
 
 .messagecontainer {
   display: flex;
+  /*flex-wrap: wrap;*/
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  width: 100%;
+  margin-top: 68px;
+
 }
 
 ul {
-  margin-top: 50px;
+  margin-top: 20px;
   list-style-type: none;
   padding: 0;
 }
@@ -177,7 +194,7 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #06c167;
 }
 
 img {
@@ -191,12 +208,14 @@ img {
 
 .search {
   margin-top: 20px;
+  padding: 0 10px;
 }
 
 .error {
   font-size: 20px;
+  font-weight: 400;
   color: dimgray;
-  margin-top: 30px
+  /*margin-top: 20px*/
 }
 
 .foodthumb {
@@ -226,7 +245,7 @@ input {
   height: 40px;
   border-radius: 5px;
   text-align: center;
-  border: #ff4c00 1px solid;
+  border: #06c167 1px solid;
   box-sizing: border-box;
   font-size: 16px;
   margin-right: 5px;
@@ -237,11 +256,18 @@ button {
   width: 150px;
   height: 40px;
   border-radius: 5px;
-  background-color: #ff4c00;
+  background-color: #06c167;
   color: white;
-  border: #ff4c00 1px solid;
+  border: #06c167 1px solid;
   box-sizing: border-box;
   margin-left: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+}
+
+button:hover{
+  background-color: #05a257;
 }
 
 @media (max-width: 1280px) {
@@ -249,9 +275,9 @@ button {
     flex-basis: 22%;
   }
 
-  h1 {
-    margin-top: 100px;
-  }
+  /*h1 {*/
+  /*  margin-top: 170px;*/
+  /*}*/
 }
 
 @media (max-width: 1024px) {
@@ -259,23 +285,23 @@ button {
     flex-basis: 22%;
   }
 
-  h1 {
-    margin-top: 120px;
-  }
+  /*h1 {*/
+  /*  margin-top: 200px;*/
+  /*}*/
 }
 
 @media (max-width: 768px) {
   .card {
     flex-basis: 30%;
   }
-  h1{
-    margin-top: 200px;
-  }
+  /*h1{*/
+  /*  margin-top: 230px;*/
+  /*}*/
 }
 
 @media (max-width: 576px) {
   h1 {
-    margin-top: 120px;
+    /*margin-top: 120px;*/
     font-size: 55px;
   }
 

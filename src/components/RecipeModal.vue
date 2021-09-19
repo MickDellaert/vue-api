@@ -55,11 +55,11 @@ h1 {
 }
 
 hr {
-  border: 1px solid #fdded1;
+  border: 1px solid #06c167;
 }
 
 h4 {
-  color: #ff4c00;
+  color: #06c167;
   text-align: left;
 }
 
@@ -88,6 +88,7 @@ p {
   justify-content: center;
   align-items: center;
   top: 0;
+  left: 0;
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
