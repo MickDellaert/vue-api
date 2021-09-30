@@ -238,6 +238,11 @@ img {
   border-radius: 4px;
   border: white 2px solid;
   margin-top: 40px;
+  cursor: pointer;
+}
+
+.card:hover{
+  color: #06c167;
 }
 
 input {
